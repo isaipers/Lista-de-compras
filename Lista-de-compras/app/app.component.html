@@ -1,0 +1,38 @@
+<div class="container">
+    <h1>Lista de Compras</h1>
+  
+    <div class="input-container">
+      <input [(ngModel)]="novoItem" placeholder="Digite o nome do item" />
+      <button (click)="adicionarItem()">Adicionar</button>
+    </div>
+
+    <div class="lista-nao-comprados">
+      <h2>Itens Não Comprados</h2>
+      <ul>
+        <li *ngFor="let item of itensNaoComprados">
+          <span *ngIf="!item.editando">{{ item.nome }}</span>
+          <input *ngIf="item.editando" [(ngModel)]="item.nome" (blur)="salvarEdicao(item, item.nome)" />
+  
+          <div class="buttons">
+            <button (click)="alternarStatus(item)">Marcar como Comprado</button>
+            <button (click)="editarItem(item)">Editar</button>
+            <button (click)="excluirItem(item.id)">Excluir</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  
+    <div class="lista-comprados">
+      <h2>Itens Comprados</h2>
+      <ul>
+        <li *ngFor="let item of itensComprados">
+          <span class="comprado">{{ item.nome }}</span>
+          <div class="buttons">
+            <button (click)="alternarStatus(item)">Marcar como Não Comprado</button>
+            <button (click)="excluirItem(item.id)">Excluir</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
